@@ -6,6 +6,35 @@ Site vitrine de **ContinuIT**, dédié à l’infogérance et à la cybersécuri
 
 Le projet est volontairement simple : un site statique en **HTML, CSS et JavaScript**, servi par **Nginx** sur une VM Debian 13 hébergée sur **Proxmox VE**.
 
+## ✏️ Modifier simplement le contenu du site
+
+La majorité des textes du site est regroupée dans un seul fichier :
+
+[`site/content.json`](https://github.com/PapyPoc/continuit/edit/main/site/content.json)
+
+Pour modifier le site depuis GitHub :
+
+1. cliquer sur le lien ci-dessus ;
+2. modifier uniquement les textes entre guillemets ;
+3. cliquer sur **Commit changes** ;
+4. valider le commit sur `main`.
+
+Le workflow GitHub Actions vérifie automatiquement que le JSON est valide puis déploie le nouveau contenu sur la VM ContinuIT.
+
+Exemple :
+
+```json
+"contact": {
+  "title": "Parlons de votre environnement IT.",
+  "description": "Votre nouveau texte...",
+  "email": "contact@continuit.fr"
+}
+```
+
+Éviter de supprimer les accolades, virgules ou guillemets. Si le JSON n’est pas valide, le workflow s’arrête avant le déploiement et le site actuellement en production reste en place.
+
+Le fichier permet notamment de modifier : le titre du navigateur, le sous-titre de la marque, le bandeau principal, les boutons, les services, les avantages, les trois étapes de la méthode, le texte de contact, l’adresse email et le pied de page.
+
 ## Fonctionnalités du site
 
 - Présentation des services d’infogérance et de cybersécurité
@@ -44,12 +73,15 @@ continuit/
 │   ├── images/
 │   ├── scripts/
 │   ├── styles/
+│   ├── content.json
 │   ├── favicon.ico
 │   └── index.html
 └── README.md
 ```
 
 Le contenu publié par Nginx provient directement du dossier `site/`. Aucun build Node.js ou Astro n’est nécessaire.
+
+`index.html` contient également le contenu initial en secours. Si `content.json` ne peut pas être chargé côté navigateur, le site conserve donc son texte HTML par défaut.
 
 ## Déploiement
 
@@ -165,9 +197,9 @@ Le vhost écoute uniquement en IPv4 sur le port `80`, ce qui permet son utilisat
 
 Les ressources statiques comme CSS, JavaScript, images et polices disposent également d’un cache navigateur de 7 jours.
 
-## Mise à jour du site
+## Mise à jour du site en local
 
-Modifier les fichiers dans `site/`, puis :
+Pour une modification plus technique, modifier les fichiers dans `site/`, puis :
 
 ```bash
 git add .
