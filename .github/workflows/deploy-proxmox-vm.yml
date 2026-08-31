@@ -1,0 +1,86 @@
+name: Déployer ContinuIT sur Proxmox
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'deploy/**'
+      - '.github/workflows/deploy-proxmox-vm.yml'
+  workflow_dispatch:
+    inputs:
+      cores:
+        description: "Nombre de vCPU (création uniquement)"
+        required: true
+        default: "2"
+        type: string
+      memory_mb:
+        description: "Mémoire en Mo (création uniquement)"
+        required: true
+        default: "2048"
+        type: string
+      disk_grow_gb:
+        description: "Espace à ajouter au disque du template en Go (création uniquement)"
+        required: true
+        default: "0"
+        type: string
+      start_vm:
+        description: "Démarrer la VM et déployer le site"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: continuit-proxmox-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Provisionner ou mettre à jour ContinuIT
+    runs-on: [self-hosted, linux, x64, continuit]
+    timeout-minutes: 40
+
+    env:
+      PROXMOX_HOST: "10.0.0.253"
+      PROXMOX_PORT: "8006"
+      TEMPLATE_VMID: "200"
+      TEMPLATE_NAME: "debian13-cloudinit"
+      TARGET_VMID: "301"
+      TARGET_IP: "10.0.0.152"
+      STORAGE: "local-btrfs"
+      BRIDGE: "vmbr0"
+      NETWORK_CIDR: "24"
+      NETWORK_GATEWAY: "10.0.0.254"
+      NETWORK_DNS: "10.0.0.254"
+      CI_USER: "poc"
+      WEB_ROOT: "/var/www/continuit"
+      VM_HOSTNAME: "web-continuit"
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v7
+
+      - name: Vérifier les fichiers du site
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f site/index.html
+          test -f deploy/nginx/continuit.conf
+          test -f deploy/scripts/provision-and-deploy.sh
+
+      - name: Provisionner la VM ou mettre le site à jour
+        id: deploy
+        shell: bash
+        env:
+          PROXMOX_TOKEN_ID: ${{ secrets.PROXMOX_TOKEN_ID }}
+          PROXMOX_TOKEN_SECRET: ${{ secrets.PROXMOX_TOKEN_SECRET }}
+          VM_SSH_PRIVATE_KEY: ${{ secrets.VM_SSH_PRIVATE_KEY }}
+          VM_SUDO_PASSWORD: ${{ secrets.VM_SUDO_PASSWORD }}
+          CORES: ${{ github.event_name == 'workflow_dispatch' && inputs.cores || '2' }}
+          MEMORY_MB: ${{ github.event_name == 'workflow_dispatch' && inputs.memory_mb || '2048' }}
+          DISK_GROW_GB: ${{ github.event_name == 'workflow_dispatch' && inputs.disk_grow_gb || '0' }}
+          START_VM: ${{ github.event_name == 'workflow_dispatch' && inputs.start_vm || 'true' }}
+        run: bash deploy/scripts/provision-and-deploy.sh
