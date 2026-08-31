@@ -68,8 +68,11 @@ jobs:
         run: |
           set -euo pipefail
           test -f site/index.html
+          test -f site/content.json
           test -f deploy/nginx/continuit.conf
           test -f deploy/scripts/provision-and-deploy.sh
+          python3 -m json.tool site/content.json >/dev/null
+          echo "content.json valide."
 
       - name: Provisionner la VM ou mettre le site à jour
         id: deploy
