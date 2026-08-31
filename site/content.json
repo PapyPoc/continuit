@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "title": "ContinuIT - Infogérance & cybersécurité pour PME et TPE"
+  },
+  "brand": {
+    "subtitle": "Infogérance & cybersécurité pour PME et TPE"
+  },
+  "hero": {
+    "badge": "Disponible pour les PME et TPE qui veulent un SI fiable",
+    "title_before": "L’IT qui reste",
+    "title_green": "stable",
+    "title_blue": "sécurisé",
+    "title_after": "et compréhensible.",
+    "description": "ContinuIT accompagne les PME et TPE avec une approche simple : prévenir les incidents, sécuriser l’existant et apporter un support réactif au quotidien.",
+    "primary_button": "Demander un échange",
+    "secondary_button": "Voir les services",
+    "tags": [
+      "Support utilisateurs",
+      "Cybersécurité",
+      "Infogérance"
+    ],
+    "objective": {
+      "label": "Objectif",
+      "value": "Zéro chaos IT",
+      "description": "Réduire les interruptions, structurer l’environnement et garder la maîtrise."
+    },
+    "approach": {
+      "label": "Approche",
+      "value": "Pragmatique",
+      "description": "Des actions utiles, priorisées et adaptées à la réalité terrain des PME et TPE."
+    },
+    "needs_title": "Ce que recherchent souvent les clients",
+    "needs": [
+      "Un prestataire réactif",
+      "Des sauvegardes fiables",
+      "Un parc mieux géré",
+      "Une sécurité qui tient la route"
+    ]
+  },
+  "services": {
+    "title": "Des prestations utiles, sans complexité artificielle.",
+    "description": "ContinuIT intervient là où les PME et TPE ont besoin de résultats concrets : stabilité, sécurité, support et structuration du SI.",
+    "items": [
+      {
+        "title": "Infogérance proactive",
+        "description": "Supervision, maintenance, mises à jour et assistance pour garder le SI stable, rapide et disponible."
+      },
+      {
+        "title": "Cybersécurité opérationnelle",
+        "description": "Durcissement, sauvegardes, MFA, gestion des accès et bonnes pratiques pour réduire les risques concrets."
+      },
+      {
+        "title": "Support utilisateurs",
+        "description": "Un interlocuteur réactif pour résoudre les incidents du quotidien et accompagner les équipes sans jargon."
+      },
+      {
+        "title": "Projets & modernisation",
+        "description": "Migration Microsoft 365, réseau, postes, Wi-Fi, documentation et structuration d’un SI propre et durable."
+      }
+    ]
+  },
+  "advantages": {
+    "title": "Un partenaire IT qui parle résultats avant de parler outils.",
+    "description": "L’objectif n’est pas d’ajouter de la complexité, mais d’apporter de la continuité, de la visibilité et de la sécurité dans le fonctionnement quotidien.",
+    "items": [
+      "Moins d’interruptions et d’imprévus",
+      "Un SI plus sécurisé sans complexité inutile",
+      "Un interlocuteur unique, clair et réactif",
+      "Des prestations adaptées aux PME et TPE"
+    ]
+  },
+  "method": {
+    "title": "Une collaboration simple en trois étapes.",
+    "items": [
+      {
+        "title": "Audit rapide",
+        "description": "Analyse de l’existant, des risques prioritaires et des points de friction pour poser un plan d’action simple."
+      },
+      {
+        "title": "Mise en ordre",
+        "description": "Sécurisation, documentation, sauvegardes, supervision et standardisation de l’environnement."
+      },
+      {
+        "title": "Suivi continu",
+        "description": "Maintenance, support, améliorations et accompagnement au fil de la croissance de l’entreprise."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Parlons de votre environnement IT.",
+    "description": "Vous avez besoin d’un support fiable, d’une remise à niveau sécurité ou d’une infogérance claire pour votre PME et TPE ? ContinuIT peut vous aider à remettre de l’ordre et de la sérénité.",
+    "email": "contact@continuit.fr",
+    "copy_button": "Copier l’adresse email"
+  },
+  "footer": {
+    "text": "ContinuIT — Infogérance & cybersécurité pour PME et TPE"
+  }
+}
